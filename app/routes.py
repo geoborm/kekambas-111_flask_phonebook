@@ -11,21 +11,6 @@ def index():
     return render_template('index.html')
 
 
-# @app.route('/add-phone', methods=["GET", "POST"])
-# def add_phone():
-#     form = PhoneForm()
-#     # Check if the form was submitted and is valid
-#     if form.validate_on_submit():
-#         first = form.first_name.data
-#         last = form.last_name.data
-#         address = form.address.data
-#         phone = form.phone_number.data
-#         print(first, last, address, phone)
-#         new_contact = Address(first_name=first, last_name=last, address=address, phone_number=phone)
-#         flash(f"{new_contact.first_name} {new_contact.last_name} has been added to the phone book", "success")
-#         return redirect(url_for('index'))
-#     return render_template('add_phone.html', form=form)
-
 @app.route('/sign_up', methods=["GET", "POST"])
 def signup():
     form = SignupForm()
@@ -62,7 +47,7 @@ def login():
             return redirect(url_for('index'))
         else:
             flash('Invalid email and/or password. Please try again', 'danger')
-            return redirect(url_for('login'))
+            return redirect(url_for('index'))
     return render_template('log_in.html', form=form)
 
 @app.route('/logout')
@@ -114,5 +99,7 @@ def delete_phone(id):
     db.session.commit()
     return redirect(url_for('index'))
 
-
+@app.route('/address_book', methods=["GET", "POST"])
+def address_book():
+    return render_template('address_book.html')
 
